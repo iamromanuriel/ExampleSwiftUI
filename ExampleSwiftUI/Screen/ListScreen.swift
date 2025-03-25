@@ -37,7 +37,7 @@ enum AppColor: String, Codable {
     }
 }
 
-struct ItemListModel: Identifiable, Codable{
+struct ItemModel: Identifiable, Codable{
     let id: Int
     let title: String
     let description: String
@@ -46,10 +46,10 @@ struct ItemListModel: Identifiable, Codable{
 }
 
     let listItems = [
-        ItemListModel(id: 1, title: "Home", description: "Access to main screen",color: AppColor.blue, icon: "house"),
-        ItemListModel(id: 2, title: "List", description: "All registros", color: AppColor.teal, icon: "list.bullet"),
-        ItemListModel(id: 3, title: "Refresh", description: "Description 3", color: AppColor.green, icon: "arrow.triangle.2.circlepath"),
-        ItemListModel(id: 4, title: "Deleted", description: "Elemente removed", color: AppColor.red, icon: "trash"),
+        ItemModel(id: 1, title: "Home", description: "Access to main screen",color: AppColor.blue, icon: "house"),
+        ItemModel(id: 2, title: "List", description: "All registros", color: AppColor.teal, icon: "list.bullet"),
+        ItemModel(id: 3, title: "Refresh", description: "Description 3", color: AppColor.green, icon: "arrow.triangle.2.circlepath"),
+        ItemModel(id: 4, title: "Deleted", description: "Elemente removed", color: AppColor.red, icon: "trash"),
     ]
 
 struct ListScreen: View {
@@ -57,6 +57,7 @@ struct ListScreen: View {
     
     var body: some View {
         ScrollView{
+            CardsList()
             LazyVGrid(columns: columns){
                 ForEach(listItems){ value in
                     ItemList(item: value).padding(12)
@@ -67,7 +68,7 @@ struct ListScreen: View {
 }
 
 struct ItemList: View {
-    var item: ItemListModel
+    var item: ItemModel
     
     var body: some View {
         HStack {
@@ -102,6 +103,6 @@ struct ItemList: View {
 
 #Preview {
     ItemList(
-        item: ItemListModel(id: 1, title: "Item 1", description: "Description 1", color: AppColor.blue, icon: "house")
+        item: ItemModel(id: 1, title: "Item 1", description: "Description 1", color: AppColor.blue, icon: "house")
     ).padding(20)
 }
