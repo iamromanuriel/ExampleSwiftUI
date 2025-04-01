@@ -18,6 +18,11 @@ let listCards = [
 struct CardsList: View {
     let columns = [GridItem(.flexible())]
     var body: some View {
+        HStack{
+            Text("Main features").bold().font(.title2)
+            Spacer()
+        }.padding(.horizontal, 8)
+        
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHGrid(rows: columns) {
                 ForEach(listCards) { item in
@@ -48,12 +53,12 @@ struct Card: View{
                 
             }
             Text("Build and animate an IOS app from scratch 20 SECTIONS - 3 HOURS")
-                .foregroundColor(.secondary)
+                .foregroundColor(.white.opacity(0.8))
                 .font(.footnote)
                 .padding(.horizontal, 6)
             
             HStack{
-                Image(systemName: "person.crop.circle.fill")
+                Image(systemName: "person.crop.circle.fill").foregroundColor(.white.opacity(0.7))
                 Spacer()
             }.padding()
             

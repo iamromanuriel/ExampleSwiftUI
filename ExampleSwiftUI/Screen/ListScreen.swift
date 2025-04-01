@@ -13,7 +13,7 @@ enum AppColor: String, Codable {
     case green
     case yellow
     case purple
-    case orange
+            case orange
     case teal
 
     var color: Color {
@@ -56,14 +56,26 @@ struct ListScreen: View {
     let columns = [GridItem(.flexible())]
     
     var body: some View {
-        ScrollView{
-            CardsList()
-            LazyVGrid(columns: columns){
-                ForEach(listItems){ value in
-                    ItemList(item: value).padding(12)
+        VStack{
+            ScrollView{
+                CardsList()
+                HStack{
+                    Text("Other options").bold().font(.title2)
+                    Spacer()
+                }.padding(.horizontal, 8)
+                LazyVGrid(columns: columns){
+                    ForEach(listItems){ value in
+                        ItemList(item: value).padding(12)
+                    }
                 }
             }
-        }
+        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+            .toolbar{
+                ToolbarItem(placement: .principal){
+                    Text("Test for more content in the list screen").foregroundColor(.black)
+                }
+            }
+        
     }
 }
 
@@ -71,7 +83,7 @@ struct ItemList: View {
     var item: ItemModel
     
     var body: some View {
-        HStack {
+        HStack () {
             VStack(alignment: .leading){
                 Text(item.title)
                     .font(.title3)
@@ -97,7 +109,6 @@ struct ItemList: View {
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .foregroundColor(.white)
         .shadow( color: item.color.color.opacity(0.3), radius: 10, x: 20, y: 10)
-        
     }
 }
 
