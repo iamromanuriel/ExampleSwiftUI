@@ -7,14 +7,18 @@
 
 import SwiftUI
 
-
+enum AppRoute: Hashable {
+    case detail
+    
+}
 
 struct ContentView: View {
     
     
     var body: some View {
-        
         HomeScreen()
+            .background(.backgroundApp)
+        
     }
 }
 

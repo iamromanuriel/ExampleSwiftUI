@@ -19,7 +19,7 @@ struct CardsList: View {
     let columns = [GridItem(.flexible())]
     var body: some View {
         HStack{
-            Text("Descubre las mejores ofertas").bold().font(.title2)
+            
             Spacer()
         }.padding(.horizontal, 8)
         
@@ -66,12 +66,19 @@ struct Card: View{
     }
 }
 
+struct CardHeader: View {
+    var body: some View {
+        VStack{
+            VStack(){}.frame(maxWidth:.infinity, maxHeight: 200).background(.teal)
+        }
+        
+        Text("Casa de campo").font(.title3).bold()
+        Text("Descubre las mejores ofertas").font(.caption).foregroundColor(.gray)
+    }
+}
+
 
 #Preview {
-    VStack{
-        CardsList()
-    }
-    .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .background(.backgroundApp)
+    CardHeader()
     
 }

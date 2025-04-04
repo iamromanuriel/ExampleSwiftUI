@@ -8,13 +8,27 @@
 import SwiftUI
 
 struct HomeScreen: View {
+    
+    @State private var navigationPath = NavigationPath()
     var body: some View {
-        ScrollView {
-            CardsList()
-            ListScreen()
-            ListSimple()
+            NavigationStack(path: $navigationPath) {
+                ScrollView {
+                    CardsList()
+                    ListScreen()
+                    ListSimple() {
+                        navigationPath.append(AppRoute.detail)
+                    }
+                }
+                .background(.backgroundApp)
+                .navigationTitle("App Compras")
+                .navigationDestination(for: AppRoute.self) { route in
+                    switch route {
+                    case .detail:
+                        DetailProductScreen()
+                    }
+                }
+            }
         }
-    }
 }
 
 #Preview {
