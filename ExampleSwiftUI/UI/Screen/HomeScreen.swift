@@ -24,8 +24,14 @@ struct HomeScreen: View {
                 .navigationDestination(for: AppRoute.self) { route in
                     switch route {
                     case .detail:
-                        DetailProductScreen()
+                        DetailGroupScreen(onNavToDetailProduct: {
+                            navigationPath.append(AppRoute.product)
+                        })
+                    
+                    case .product:
+                        ProudctScreen()
                     }
+                    
                 }
             }
         }

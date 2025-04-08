@@ -6,62 +6,6 @@
 //
 import SwiftUI
 
-
-enum AppColor: String, Codable {
-    case red
-    case blue
-    case green
-    case yellow
-    case purple
-            case orange
-    case teal
-
-    var color: Color {
-        switch self {
-        case .red:
-            return .red
-        case .blue:
-            return .blue400
-        case .green:
-            return .green200
-        case .yellow:
-            return .yellow
-        case .purple:
-            return .purple400
-        case .orange:
-            return .purple
-        case .teal:
-            return .teal
-        }
-        
-    }
-}
-
-struct ItemModel: Identifiable, Codable{
-    let id: Int
-    let title: String
-    let description: String
-    let color: AppColor
-    let icon: String
-}
-
-    let listItems = [
-        ItemModel(id: 1, title: "Home", description: "Access to main screen",color: AppColor.blue, icon: "house"),
-        ItemModel(id: 2, title: "List", description: "All registros", color: AppColor.teal, icon: "list.bullet"),
-        ItemModel(id: 3, title: "Refresh", description: "Description 3", color: AppColor.green, icon: "arrow.triangle.2.circlepath"),
-        ItemModel(id: 4, title: "Deleted", description: "Elemente removed", color: AppColor.purple, icon: "trash"),
-    ]
-
-
-let listRestaurant = [
-    ItemModel(id: 1, title: "Casa de campo", description: "Desayunos",color: AppColor.blue, icon: "storefront.fill"),
-    ItemModel(id: 2, title: "Tac00s", description: "Tacos y ...",color: AppColor.teal, icon: "storefront.fill"),
-    ItemModel(id: 3, title: "Cafe 0o", description: "Cafe y ...",color: AppColor.blue, icon: "storefront.fill"),
-    ItemModel(id: 4, title: "BurgerMac", description: "Hamburgesas y ...",color: AppColor.blue, icon: "storefront.fill"),
-    ItemModel(id: 5, title: "Shuchii", description: "Shushi y ...",color: AppColor.green, icon: "storefront.fill"),
-    ItemModel(id: 6, title: "Pipzzas", description: "Pizza y ...",color: AppColor.teal, icon: "storefront.fill")
-]
-
 struct ListScreen: View {
     let columns = [GridItem(.flexible())]
     
@@ -148,6 +92,8 @@ struct ItemListSimple: View {
 }
 
 struct ItemListProduct: View {
+    var onNavToDetailProduct: () -> Void
+    
     var body: some View {
         HStack{
             ZStack{
@@ -168,50 +114,40 @@ struct ItemListProduct: View {
                 }
             }
         }
+        .onTapGesture {
+            onNavToDetailProduct()
+        }
         .padding()
         .background(.white)
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .padding(.horizontal, 6)
-    }
-}
-
-struct ListItemListProduct: View {
-    let columns = [GridItem(.flexible())]
-    var body: some View {
-        LazyVGrid(columns: columns){
-            ForEach(listRestaurant){ item in
-                ItemListProduct()
-            }
-        }
-    }
-}
-
-struct ListSimple: View {
-    var onClick: () -> Void
-    let columns = [GridItem(.flexible())]
-    
-    var body: some View {
-        HStack{
-            Text("Recientes").bold().font(.title2)
-            Spacer()
-        }.padding(.horizontal, 8)
-        LazyVGrid(columns: columns){
-            ForEach(listRestaurant){ item in
-                ItemListSimple(item: item){
-                    onClick()
-                }
-            }
-        }
         
     }
 }
 
+struct ItemListOptionPlus: View{
+    @State private var isOn: Bool = false
+    var body: some View{
+        HStack{
+            VStack(alignment: .leading){
+                Text("Extra crema").font(.callout).bold()
+                Text("+MXN 10.00").font(.footnote).foregroundColor(.gray)
+            }
+            Spacer()
+            Toggle("", isOn: $isOn)
+                .toggleStyle(iosCheckboxToogleStyle())
+            
+            
+        }.padding()
+    }
+}
 
 
 
 #Preview {
-    ScrollView{
-        ListItemListProduct()
-    }.background(.backgroundApp)
+    ItemListOptionPlus()
+    /*ScrollView{
+        
+    }.background(.backgroundApp)*/
     
 }

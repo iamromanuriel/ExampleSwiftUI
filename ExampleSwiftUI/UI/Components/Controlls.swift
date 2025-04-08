@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-enum ControllType: String{
-    case group
-    case item
-}
 
 
 struct Counter: View {
@@ -51,6 +47,16 @@ struct Counter: View {
 }
 
 
+struct GroupRadioButton: View {
+    @State private var isOn = false
+    var body: some View {
+        VStack{
+            Toggle("Element", isOn: $isOn)
+                .toggleStyle(iosCheckboxToogleStyle())
+        }
+    }
+}
+
 #Preview {
-    Counter(type: ControllType.item)
+    GroupRadioButton()
 }

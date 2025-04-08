@@ -9,7 +9,7 @@ import SwiftUI
 
 enum AppRoute: Hashable {
     case detail
-    
+    case product
 }
 
 struct ContentView: View {

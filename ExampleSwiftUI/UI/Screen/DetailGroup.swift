@@ -7,16 +7,17 @@
 
 import SwiftUI
 
-struct DetailProductScreen: View {
+struct DetailGroupScreen: View {
+    var onNavToDetailProduct: () -> Void = {}
     var body: some View {
         ScrollView {
-            ListItemListProduct()
+            CardHeader(type: .group)
+            ListItemListProduct(onNavToDetailProduct: onNavToDetailProduct)
         }
         .background(.backgroundApp)
-        .navigationTitle(Text("Casa de campo"))
     }
 }
 
 #Preview {
-    DetailProductScreen()
+    DetailGroupScreen()
 }
