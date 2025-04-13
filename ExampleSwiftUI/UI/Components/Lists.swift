@@ -51,7 +51,40 @@ struct ListItemOptionPlus: View {
     }
 }
 
+struct ListProductH: View {
+    let columns = [GridItem(.flexible())]
+    var body: some View {
+        HStack{
+            Text("Acompañalo con").font(.title3).bold().padding(.horizontal, 8)
+            Spacer()
+        }
+        
+        ScrollView (.horizontal, showsIndicators: false){
+            LazyHGrid(rows:columns){
+                ForEach(1..<6){ item in
+                    CardItemProduct().padding(.horizontal, 10)
+                }
+            }
+        }
+    }
+}
+
+struct ListItemListProductSmall: View {
+    let columns = [GridItem(.flexible())]
+    var body: some View {
+        HStack{
+            Text("Otras opciones").font(.title3).bold().padding(.horizontal, 8)
+            Spacer()
+        }
+        LazyVGrid(columns: columns){
+            ForEach(listItems){ item in
+                ItemListProduct(onNavToDetailProduct: {})
+            }
+        }
+    }
+}
 
 #Preview {
-    ListItemListProduct(onNavToDetailProduct: {})
+    ListItemListProductSmall()
+    
 }

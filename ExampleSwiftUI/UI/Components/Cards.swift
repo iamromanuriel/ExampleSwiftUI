@@ -86,8 +86,29 @@ struct CardHeader: View {
     }
 }
 
+struct CardItemProduct: View {
+    var body: some View {
+        VStack{
+            ZStack(alignment: .bottomTrailing){
+                Rectangle()
+                    .frame(width: 100, height: 100)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .foregroundColor(.teal)
+                ZStack{
+                    Circle().fill(.white).frame(width: 30, height: 30)
+                    Image(systemName: "plus").foregroundColor(.black)
+                }.padding(8)
+            }
+            
+            Text("Galleta de avena").font(.footnote).foregroundColor(.black).bold()
+            Text("$9.99").foregroundColor(.gray)
+        }
+        
+    }
+}
+
 
 #Preview {
-    CardHeader(type: ControllType.item)
+    CardItemProduct()
     
 }

@@ -13,7 +13,9 @@ struct ProudctScreen: View {
             Divider()
             ListItemOptionPlus()
             Divider()
-            
+            ListProductH().padding(.vertical)
+            Divider()
+            ListItemListProductSmall()
         }
     }
 }
